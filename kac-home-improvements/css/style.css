@@ -1,0 +1,732 @@
+/* =================================================================
+   K.A.C Home Improvements - main stylesheet
+   One file styles the whole site. Edit colours and fonts here once
+   and every page updates.
+   ================================================================= */
+
+/* -----------------------------------------------------------------
+   1. DESIGN TOKENS
+   These are the site's colours, fonts and spacing in one place.
+   Change a value here and it changes everywhere.
+   ----------------------------------------------------------------- */
+:root {
+  /* Colours */
+  --ink: #16201b;          /* near-black text, used on light pages */
+  --forest: #1f3a2d;       /* main brand green, used for dark sections */
+  --forest-2: #2a4c3b;     /* a slightly lighter green for layering */
+  --brass: #b98032;        /* warm accent for buttons and highlights */
+  --brass-dark: #9a6826;   /* darker brass for button hover */
+  --paper: #f4f3ef;        /* soft warm white page background */
+  --stone: #e7e6df;        /* light grey for cards and borders */
+  --sage: #dce2d6;         /* soft green tint for small fills */
+  --muted: #5a665d;        /* grey-green for less important text */
+
+  /* A faint hairline colour used for thin dividing lines */
+  --line: rgba(22, 32, 27, 0.14);
+
+  /* Fonts */
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif; /* headings */
+  --font-body: "Inter", system-ui, sans-serif;                  /* normal text */
+  --font-mono: "Space Mono", ui-monospace, monospace;           /* small labels */
+
+  /* Page width and standard spacing */
+  --max-width: 1200px;
+  --gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+/* -----------------------------------------------------------------
+   2. BASE RESET
+   A few sensible defaults so things look the same in every browser.
+   ----------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.7;
+  font-size: 1.0625rem;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* safety: never allow sideways scrolling */
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* -----------------------------------------------------------------
+   3. SHARED HELPERS
+   Small reusable pieces used across many pages.
+   ----------------------------------------------------------------- */
+
+/* Keeps content centred and stops it getting too wide */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem);
+}
+
+/* The small monospaced label, e.g. "01 / KITCHENS" */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* A short brass line often shown next to the eyebrow */
+.eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: var(--brass);
+}
+
+/* All main headings use the display font and tight spacing */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 4.75rem); }
+h2 { font-size: clamp(1.9rem, 3.8vw, 3rem); }
+h3 { font-size: 1.3rem; }
+
+/* Buttons -------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+/* Solid brass button - the main call to action */
+.btn-primary {
+  background: var(--brass);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--brass-dark);
+  transform: translateY(-2px);
+}
+
+/* Outlined button - secondary action */
+.btn-outline {
+  background: transparent;
+  border-color: currentColor;
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+/* A lighter outline used on dark green backgrounds */
+.btn-outline-light {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+.btn-outline-light:hover {
+  background: #fff;
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+
+/* -----------------------------------------------------------------
+   4. HEADER + NAVIGATION
+   Sticky bar at the top of every page.
+   ----------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(244, 243, 239, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 72px;
+}
+
+/* The logo / company name */
+.logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+.logo .logo-mark {
+  color: var(--brass);
+}
+
+/* The list of nav links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--ink);
+}
+
+/* The phone number / call button on the right of the header */
+.header-cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.header-phone {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* The hamburger button - hidden on desktop, shown on mobile */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  margin: 5px 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* -----------------------------------------------------------------
+   5. HERO (top section of the home page)
+   ----------------------------------------------------------------- */
+.hero {
+  padding: clamp(3.5rem, 8vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--gap);
+  align-items: center;
+}
+.hero h1 {
+  margin: 1.25rem 0;
+}
+.hero h1 .accent {
+  color: var(--brass);
+}
+.hero-lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 38ch;
+  margin-bottom: 2rem;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* The little trust line under the buttons, e.g. "20+ years..." */
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero-trust span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hero-trust span::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--brass);
+  border-radius: 50%;
+}
+
+/* -----------------------------------------------------------------
+   6. IMAGE SLOTS
+   Placeholder boxes where your dad can drop in real project photos.
+   To add a real photo: put an <img> inside, or set a background-image.
+   ----------------------------------------------------------------- */
+.img-slot {
+  position: relative;
+  background: var(--sage);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* The label shown while the box is still empty */
+.img-slot .slot-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--forest);
+  text-align: center;
+  padding: 1rem;
+  opacity: 0.65;
+}
+
+/* -----------------------------------------------------------------
+   7. SECTIONS - general spacing for blocks of content
+   ----------------------------------------------------------------- */
+.section {
+  padding: clamp(3.5rem, 8vw, 6rem) 0;
+}
+.section-head {
+  max-width: 60ch;
+  margin-bottom: 3rem;
+}
+.section-head h2 {
+  margin: 1rem 0 1rem;
+}
+.section-head p {
+  color: var(--muted);
+}
+
+/* A dark green section (used for "about" and call-to-action bands) */
+.section-dark {
+  background: var(--forest);
+  color: var(--paper);
+}
+.section-dark .eyebrow { color: var(--brass); }
+.section-dark .section-head p { color: rgba(244, 243, 239, 0.8); }
+
+/* -----------------------------------------------------------------
+   8. SERVICES LIST (the four numbered service cards on the home page)
+   ----------------------------------------------------------------- */
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line); /* the gap colour shows as thin lines */
+  border: 1px solid var(--line);
+}
+.service-card {
+  background: var(--paper);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: background 0.25s ease;
+}
+.service-card:hover {
+  background: #fff;
+}
+.service-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--brass);
+  letter-spacing: 0.1em;
+}
+.service-card h3 {
+  font-size: 1.45rem;
+}
+.service-card p {
+  color: var(--muted);
+  font-size: 0.98rem;
+  flex-grow: 1;
+}
+.service-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+.service-card:hover .service-link {
+  color: var(--brass);
+  gap: 0.8rem;
+}
+
+/* -----------------------------------------------------------------
+   9. ABOUT / FEATURE ROW (text beside a list of points)
+   ----------------------------------------------------------------- */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+  align-items: center;
+}
+.feature-list {
+  list-style: none;
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.feature-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.feature-list .check {
+  flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: 0.2rem;
+  border-radius: 50%;
+  background: var(--brass);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+/* -----------------------------------------------------------------
+   10. STATS STRIP (small row of facts)
+   ----------------------------------------------------------------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 3rem;
+  margin-top: 3rem;
+}
+.stat .num {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 700;
+  color: var(--brass);
+  line-height: 1;
+}
+.stat .label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244, 243, 239, 0.75);
+  margin-top: 0.6rem;
+}
+
+/* -----------------------------------------------------------------
+   11. GALLERY GRID
+   ----------------------------------------------------------------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.gallery-grid .img-slot {
+  aspect-ratio: 1 / 1;
+}
+
+/* -----------------------------------------------------------------
+   12. CALL-TO-ACTION BAND (bottom of most pages)
+   ----------------------------------------------------------------- */
+.cta-band {
+  text-align: center;
+}
+.cta-band h2 {
+  margin-bottom: 1.25rem;
+}
+.cta-band p {
+  color: rgba(244, 243, 239, 0.8);
+  max-width: 50ch;
+  margin: 0 auto 2rem;
+}
+
+/* -----------------------------------------------------------------
+   13. CONTACT PAGE
+   ----------------------------------------------------------------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+.contact-form {
+  display: grid;
+  gap: 1.1rem;
+}
+.contact-form label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--ink);
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
+}
+.contact-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* A single contact detail line (phone, email, address) */
+.contact-detail {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.contact-detail .label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass);
+  min-width: 90px;
+}
+
+/* -----------------------------------------------------------------
+   14. FOOTER
+   ----------------------------------------------------------------- */
+.site-footer {
+  background: var(--ink);
+  color: rgba(244, 243, 239, 0.7);
+  padding: clamp(3rem, 6vw, 4.5rem) 0 2rem;
+  font-size: 0.92rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: var(--gap);
+  margin-bottom: 3rem;
+}
+.footer-grid h4 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 1.1rem;
+  font-weight: 400;
+}
+.footer-brand .logo {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.footer-links {
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+}
+.footer-links a:hover {
+  color: var(--brass);
+}
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+/* -----------------------------------------------------------------
+   15. PAGE HEADER (small hero for inner pages like Kitchens)
+   ----------------------------------------------------------------- */
+.page-hero {
+  padding: clamp(3rem, 7vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--line);
+}
+.page-hero h1 {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  margin: 1rem 0 1.25rem;
+  max-width: 18ch;
+}
+.page-hero p {
+  color: var(--muted);
+  max-width: 55ch;
+  font-size: 1.1rem;
+}
+
+/* -----------------------------------------------------------------
+   16. SMALL SCROLL-IN ANIMATION
+   Elements with class "reveal" fade up as they enter the screen.
+   Controlled by js/main.js.
+   ----------------------------------------------------------------- */
+/* By default (no JavaScript) content is fully visible.
+   The hidden start state only applies once JS adds the "js" class to
+   <html>, so the page can never hide content if a script fails. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -----------------------------------------------------------------
+   17. RESPONSIVE - rules for tablets and phones
+   ----------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  /* Stack the two-column layouts into one column */
+  .hero-grid,
+  .split,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .services {
+    grid-template-columns: 1fr;
+  }
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Hide the desktop nav and show the hamburger button */
+  .nav-toggle {
+    display: block;
+  }
+  .nav-links {
+    position: fixed;
+    inset: 72px 0 auto 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 1rem clamp(1.25rem, 5vw, 3rem);
+    /* Hidden by default - shown when the menu is open */
+    display: none;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links li {
+    width: 100%;
+  }
+  .nav-links a {
+    display: block;
+    padding: 0.85rem 0;
+    width: 100%;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.05rem;
+  }
+  /* On mobile, show the phone (tap to call) and hide the quote button. */
+  .header-phone {
+    display: inline-block;
+  }
+  .header-cta .btn-primary {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  /* On a narrow phone, shorten the header logo to just "K.A.C"
+     so it fits next to the phone number. */
+  .site-header .logo-text {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Respect users who prefer no motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
