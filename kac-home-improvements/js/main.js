@@ -32,6 +32,45 @@ if (navToggle && navLinks) {
 /* ---- 2. SCROLL REVEAL ------------------------------------------ */
 // Grab every element we want to fade in.
 const revealItems = document.querySelectorAll(".reveal");
+const heroSlides = document.querySelectorAll('.hero-slide');
+const heroDots = document.querySelectorAll('.hero-dot');
+const heroPrev = document.querySelector('.hero-arrow-prev');
+const heroNext = document.querySelector('.hero-arrow-next');
+
+if (heroSlides.length > 0) {
+  let heroSlideIndex = 0;
+  const updateHeroSlide = (newIndex) => {
+    heroSlides[heroSlideIndex].classList.remove('active');
+    heroDots[heroSlideIndex]?.classList.remove('active');
+    heroSlideIndex = newIndex;
+    heroSlides[heroSlideIndex].classList.add('active');
+    heroDots[heroSlideIndex]?.classList.add('active');
+  };
+
+  const showNextSlide = () => {
+    const nextIndex = (heroSlideIndex + 1) % heroSlides.length;
+    updateHeroSlide(nextIndex);
+  };
+
+  const showPrevSlide = () => {
+    const prevIndex = (heroSlideIndex - 1 + heroSlides.length) % heroSlides.length;
+    updateHeroSlide(prevIndex);
+  };
+
+  heroNext?.addEventListener('click', showNextSlide);
+  heroPrev?.addEventListener('click', showPrevSlide);
+
+  heroDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => updateHeroSlide(index));
+  });
+
+  let heroInterval = setInterval(showNextSlide, 7000);
+  const heroCarousel = document.querySelector('.hero-carousel');
+  heroCarousel?.addEventListener('mouseenter', () => clearInterval(heroInterval));
+  heroCarousel?.addEventListener('mouseleave', () => {
+    heroInterval = setInterval(showNextSlide, 7000);
+  });
+}
 
 // Safety net: if the browser can't observe scrolling, just show everything.
 if (!("IntersectionObserver" in window)) {
