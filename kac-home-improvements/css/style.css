@@ -11,18 +11,19 @@
    ----------------------------------------------------------------- */
 :root {
   /* Colours */
-  --ink: #16201b;          /* near-black text, used on light pages */
-  --forest: #1f3a2d;       /* main brand green, used for dark sections */
-  --forest-2: #2a4c3b;     /* a slightly lighter green for layering */
-  --brass: #b98032;        /* warm accent for buttons and highlights */
-  --brass-dark: #9a6826;   /* darker brass for button hover */
-  --paper: #f4f3ef;        /* soft warm white page background */
-  --stone: #e7e6df;        /* light grey for cards and borders */
-  --sage: #dce2d6;         /* soft green tint for small fills */
-  --muted: #5a665d;        /* grey-green for less important text */
+  --ink: #f5f8fc;          /* light text for dark background */
+  --forest: #07090f;       /* deep black used for dark sections */
+  --forest-2: #101827;     /* slightly lighter surface for cards */
+  --brass: #42b8ff;        /* bright accent for buttons and highlights */
+  --brass-dark: #1f76b3;   /* darker blue for hover states */
+  --paper: #02050a;        /* rich page background */
+  --stone: #111a26;        /* muted surface for cards and borders */
+  --surface: #101828;      /* card surface on dark background */
+  --sage: rgba(66, 184, 255, 0.12); /* cool glassy overlay */
+  --muted: #9fb5cf;        /* soft blue-grey for secondary text */
 
   /* A faint hairline colour used for thin dividing lines */
-  --line: rgba(22, 32, 27, 0.14);
+  --line: rgba(66, 184, 255, 0.12);
 
   /* Fonts */
   --font-display: "Bricolage Grotesque", system-ui, sans-serif; /* headings */
@@ -51,7 +52,7 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--ink);
-  background: var(--paper);
+  background: radial-gradient(circle at top left, rgba(66, 184, 255, 0.14), transparent 18%), linear-gradient(180deg, #02050a 0%, #090f18 100%);
   line-height: 1.7;
   font-size: 1.0625rem;
   -webkit-font-smoothing: antialiased;
@@ -122,16 +123,18 @@ h3 { font-size: 1.3rem; }
   font-weight: 600;
   font-size: 0.95rem;
   padding: 0.9rem 1.6rem;
-  border-radius: 2px;
+  border-radius: 999px;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
-/* Solid brass button - the main call to action */
+/* Solid accent button */
 .btn-primary {
   background: var(--brass);
-  color: #fff;
+  color: #02050a;
+  border-color: transparent;
+  box-shadow: 0 16px 35px rgba(66, 184, 255, 0.18);
 }
 .btn-primary:hover {
   background: var(--brass-dark);
@@ -141,15 +144,16 @@ h3 { font-size: 1.3rem; }
 /* Outlined button - secondary action */
 .btn-outline {
   background: transparent;
-  border-color: currentColor;
+  border-color: var(--brass);
+  color: var(--brass);
 }
 .btn-outline:hover {
-  background: var(--ink);
-  color: var(--paper);
+  background: rgba(66, 184, 255, 0.12);
+  color: #fff;
   transform: translateY(-2px);
 }
 
-/* A lighter outline used on dark green backgrounds */
+/* A lighter outline used on dark backgrounds */
 .btn-outline-light {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.4);
@@ -169,9 +173,9 @@ h3 { font-size: 1.3rem; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(244, 243, 239, 0.85);
+  background: rgba(2, 5, 10, 0.96);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(66, 184, 255, 0.12);
 }
 
 .header-inner {
@@ -192,9 +196,13 @@ h3 { font-size: 1.3rem; }
   align-items: center;
   gap: 0.5rem;
   white-space: nowrap;
+  color: #fff;
 }
 .logo .logo-mark {
   color: var(--brass);
+}
+.logo .logo-text {
+  color: rgba(255, 255, 255, 0.82);
 }
 
 /* The list of nav links */
@@ -251,6 +259,10 @@ h3 { font-size: 1.3rem; }
    ----------------------------------------------------------------- */
 .hero {
   padding: clamp(3.5rem, 8vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
+  background: radial-gradient(circle at 12% 15%, rgba(66, 184, 255, 0.14), transparent 20%), rgba(2, 5, 10, 0.92);
+  border: 1px solid rgba(66, 184, 255, 0.12);
+  border-radius: 32px;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.26);
 }
 .hero-grid {
   display: grid;
@@ -308,14 +320,15 @@ h3 { font-size: 1.3rem; }
    ----------------------------------------------------------------- */
 .img-slot {
   position: relative;
-  background: var(--sage);
-  border: 1px solid var(--line);
-  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(66, 184, 255, 0.14);
+  border-radius: 28px;
   overflow: hidden;
   aspect-ratio: 4 / 5;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 20px 45px rgba(0, 0, 0, 0.22);
 }
 .img-slot img {
   width: 100%;
@@ -328,10 +341,10 @@ h3 { font-size: 1.3rem; }
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--forest);
+  color: rgba(255, 255, 255, 0.85);
   text-align: center;
   padding: 1rem;
-  opacity: 0.65;
+  opacity: 0.85;
 }
 
 /* -----------------------------------------------------------------
@@ -353,11 +366,11 @@ h3 { font-size: 1.3rem; }
 
 /* A dark green section (used for "about" and call-to-action bands) */
 .section-dark {
-  background: var(--forest);
-  color: var(--paper);
+  background: #070a12;
+  color: var(--ink);
 }
 .section-dark .eyebrow { color: var(--brass); }
-.section-dark .section-head p { color: rgba(244, 243, 239, 0.8); }
+.section-dark .section-head p { color: rgba(245, 248, 252, 0.82); }
 
 /* -----------------------------------------------------------------
    8. SERVICES LIST (the four numbered service cards on the home page)
@@ -370,15 +383,18 @@ h3 { font-size: 1.3rem; }
   border: 1px solid var(--line);
 }
 .service-card {
-  background: var(--paper);
+  background: var(--surface);
   padding: 2.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: background 0.25s ease;
+  border: 1px solid rgba(66, 184, 255, 0.08);
+  transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 .service-card:hover {
-  background: #fff;
+  background: rgba(66, 184, 255, 0.08);
+  transform: translateY(-2px);
+  border-color: var(--brass);
 }
 .service-num {
   font-family: var(--font-mono);
@@ -525,9 +541,9 @@ h3 { font-size: 1.3rem; }
   font-family: var(--font-body);
   font-size: 1rem;
   padding: 0.85rem 1rem;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   color: var(--ink);
 }
 .contact-form input:focus,
@@ -560,8 +576,8 @@ h3 { font-size: 1.3rem; }
    14. FOOTER
    ----------------------------------------------------------------- */
 .site-footer {
-  background: var(--ink);
-  color: rgba(244, 243, 239, 0.7);
+  background: #05080c;
+  color: rgba(255, 255, 255, 0.68);
   padding: clamp(3rem, 6vw, 4.5rem) 0 2rem;
   font-size: 0.92rem;
 }
@@ -576,7 +592,7 @@ h3 { font-size: 1.3rem; }
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.92);
   margin-bottom: 1.1rem;
   font-weight: 400;
 }
