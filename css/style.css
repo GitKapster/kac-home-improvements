@@ -252,6 +252,28 @@ h3 { font-size: 1.3rem; }
   white-space: nowrap;
 }
 
+/* Make the top-right 'Get a Quote' action a perfect circular CTA */
+.header-cta .btn-primary {
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  font-size: 0.78rem;
+  box-shadow: 0 14px 30px rgba(66, 184, 255, 0.16);
+  white-space: normal; /* allow wrapping but keep centered */
+}
+
+/* Slightly increase gap so the phone and CTA breathe */
+.header-cta { gap: 1.25rem; }
+
+/* Ensure the circular CTA sits vertically centered in the header */
+.site-header .header-cta .btn-primary { margin-top: 0; }
+
 /* The hamburger button - hidden on desktop, shown on mobile */
 .nav-toggle {
   display: none;
