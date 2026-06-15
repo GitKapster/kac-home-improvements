@@ -194,11 +194,16 @@ h3 { font-size: 1.3rem; }
   font-weight: 800;
   font-size: 1.15rem;
   letter-spacing: -0.02em;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
   color: #fff;
+}
+.logo-img {
+  width: 4.8rem;
+  height: auto;
+  display: block;
+  border-radius: 0.75rem;
 }
 .logo .logo-mark {
   color: var(--brass);
@@ -309,10 +314,14 @@ h3 { font-size: 1.3rem; }
 }
 .hero-text {
   max-width: 42rem;
+  padding-top: 6rem;
 }
 .hero-logo {
-  margin-bottom: 1.75rem;
-  max-width: 18rem;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  width: 11rem;
+  z-index: 3;
 }
 .hero-logo img {
   width: 100%;
@@ -735,8 +744,16 @@ h3 { font-size: 1.3rem; }
   font-weight: 400;
 }
 .footer-brand .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
   color: #fff;
   margin-bottom: 1rem;
+}
+.footer-brand .logo img {
+  width: 4rem;
+  height: auto;
+  border-radius: 0.75rem;
 }
 .footer-links {
   list-style: none;
