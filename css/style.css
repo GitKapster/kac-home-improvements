@@ -798,11 +798,20 @@ h3 { font-size: 1.3rem; }
 }
 
 /* -----------------------------------------------------------------
-   15. PAGE HEADER (small hero for inner pages like Kitchens)
+   15. PAGE HEADER (inner page hero with optional image slideshow)
    ----------------------------------------------------------------- */
 .page-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 460px;
+  display: flex;
+  align-items: flex-end;
   padding: clamp(3rem, 7vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
   border-bottom: 1px solid var(--line);
+}
+.page-hero .container {
+  position: relative;
+  z-index: 1;
 }
 .page-hero h1 {
   font-size: clamp(2.25rem, 5vw, 3.75rem);
@@ -814,6 +823,56 @@ h3 { font-size: 1.3rem; }
   max-width: 55ch;
   font-size: 1.1rem;
 }
+
+/* Background slides */
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.page-hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  filter: brightness(0.35) saturate(0.9);
+}
+.page-hero-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2,5,10,0.1) 0%, rgba(2,5,10,0.72) 100%);
+}
+.page-hero-slide.active {
+  opacity: 1;
+}
+
+/* Prev / Next arrows */
+.page-hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(2,5,10,0.55);
+  color: #fff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s ease;
+}
+.page-hero-arrow:hover {
+  background: rgba(66,184,255,0.25);
+}
+.page-hero-arrow-prev { left: 1.25rem; }
+.page-hero-arrow-next { right: 1.25rem; }
 
 /* -----------------------------------------------------------------
    16. SMALL SCROLL-IN ANIMATION
