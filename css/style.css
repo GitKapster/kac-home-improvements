@@ -1,14 +1,3 @@
-/* =================================================================
-   K.A.C Home Improvements - main stylesheet
-   One file styles the whole site. Edit colours and fonts here once
-   and every page updates.
-   ================================================================= */
-
-/* -----------------------------------------------------------------
-   1. DESIGN TOKENS
-   These are the site's colours, fonts and spacing in one place.
-   Change a value here and it changes everywhere.
-   ----------------------------------------------------------------- */
 :root {
   /* Colours */
   --ink: #f5f8fc;          /* light text for dark background */
@@ -35,10 +24,6 @@
   --gap: clamp(1.5rem, 4vw, 4rem);
 }
 
-/* -----------------------------------------------------------------
-   2. BASE RESET
-   A few sensible defaults so things look the same in every browser.
-   ----------------------------------------------------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -68,11 +53,6 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-/* -----------------------------------------------------------------
-   3. SHARED HELPERS
-   Small reusable pieces used across many pages.
-   ----------------------------------------------------------------- */
 
 /* Keeps content centred and stops it getting too wide */
 .container {
@@ -114,7 +94,7 @@ h1 { font-size: clamp(2.5rem, 6vw, 4.75rem); }
 h2 { font-size: clamp(1.9rem, 3.8vw, 3rem); }
 h3 { font-size: 1.3rem; }
 
-/* Buttons -------------------------------------------------------- */
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -165,10 +145,6 @@ h3 { font-size: 1.3rem; }
   transform: translateY(-2px);
 }
 
-/* -----------------------------------------------------------------
-   4. HEADER + NAVIGATION
-   Sticky bar at the top of every page.
-   ----------------------------------------------------------------- */
 .site-header {
   position: sticky;
   top: 0;
@@ -291,9 +267,6 @@ h3 { font-size: 1.3rem; }
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* -----------------------------------------------------------------
-   5. HERO (top section of the home page)
-   ----------------------------------------------------------------- */
 .hero {
   position: relative;
   overflow: hidden;
@@ -482,11 +455,6 @@ h3 { font-size: 1.3rem; }
   border-radius: 50%;
 }
 
-/* -----------------------------------------------------------------
-   6. IMAGE SLOTS
-   Placeholder boxes where your dad can drop in real project photos.
-   To add a real photo: put an <img> inside, or set a background-image.
-   ----------------------------------------------------------------- */
 .img-slot {
   position: relative;
   background: rgba(255, 255, 255, 0.04);
@@ -515,10 +483,7 @@ h3 { font-size: 1.3rem; }
   padding: 1rem;
   opacity: 0.85;
 }
-
-/* -----------------------------------------------------------------
-   7. SECTIONS - general spacing for blocks of content
-   ----------------------------------------------------------------- */
+/
 .section {
   padding: clamp(3.5rem, 8vw, 6rem) 0;
 }
@@ -541,9 +506,6 @@ h3 { font-size: 1.3rem; }
 .section-dark .eyebrow { color: var(--brass); }
 .section-dark .section-head p { color: rgba(245, 248, 252, 0.82); }
 
-/* -----------------------------------------------------------------
-   8. SERVICES LIST (the four numbered service cards on the home page)
-   ----------------------------------------------------------------- */
 .services {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -595,9 +557,6 @@ h3 { font-size: 1.3rem; }
   gap: 0.8rem;
 }
 
-/* -----------------------------------------------------------------
-   9. ABOUT / FEATURE ROW (text beside a list of points)
-   ----------------------------------------------------------------- */
 .split {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -629,9 +588,6 @@ h3 { font-size: 1.3rem; }
   font-size: 0.8rem;
 }
 
-/* -----------------------------------------------------------------
-   10. STATS STRIP (small row of facts)
-   ----------------------------------------------------------------- */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -656,9 +612,6 @@ h3 { font-size: 1.3rem; }
   margin-top: 0.6rem;
 }
 
-/* -----------------------------------------------------------------
-   11. GALLERY GRID
-   ----------------------------------------------------------------- */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -668,9 +621,6 @@ h3 { font-size: 1.3rem; }
   aspect-ratio: 1 / 1;
 }
 
-/* -----------------------------------------------------------------
-   12. CALL-TO-ACTION BAND (bottom of most pages)
-   ----------------------------------------------------------------- */
 .cta-band {
   text-align: center;
 }
@@ -683,9 +633,6 @@ h3 { font-size: 1.3rem; }
   margin: 0 auto 2rem;
 }
 
-/* -----------------------------------------------------------------
-   13. CONTACT PAGE
-   ----------------------------------------------------------------- */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -741,9 +688,6 @@ h3 { font-size: 1.3rem; }
   min-width: 90px;
 }
 
-/* -----------------------------------------------------------------
-   14. FOOTER
-   ----------------------------------------------------------------- */
 .site-footer {
   background: #05080c;
   color: rgba(255, 255, 255, 0.68);
@@ -797,9 +741,6 @@ h3 { font-size: 1.3rem; }
   letter-spacing: 0.05em;
 }
 
-/* -----------------------------------------------------------------
-   15. PAGE HEADER (inner page hero with optional image slideshow)
-   ----------------------------------------------------------------- */
 .page-hero {
   position: relative;
   overflow: hidden;
@@ -874,14 +815,6 @@ h3 { font-size: 1.3rem; }
 .page-hero-arrow-prev { left: 1.25rem; }
 .page-hero-arrow-next { right: 1.25rem; }
 
-/* -----------------------------------------------------------------
-   16. SMALL SCROLL-IN ANIMATION
-   Elements with class "reveal" fade up as they enter the screen.
-   Controlled by js/main.js.
-   ----------------------------------------------------------------- */
-/* By default (no JavaScript) content is fully visible.
-   The hidden start state only applies once JS adds the "js" class to
-   <html>, so the page can never hide content if a script fails. */
 .js .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -892,9 +825,6 @@ h3 { font-size: 1.3rem; }
   transform: translateY(0);
 }
 
-/* -----------------------------------------------------------------
-   17. RESPONSIVE - rules for tablets and phones
-   ----------------------------------------------------------------- */
 @media (max-width: 1024px) {
   /* Stack the two-column layouts into one column */
   .hero-grid,
